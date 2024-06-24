@@ -208,6 +208,16 @@
         function closeModal() {
             document.getElementById("modal").style.display = "none";
         }
+
+        function fillFromPermaLink() {
+            const params = new URLSearchParams(window.location.search);
+            if (!params.has("text")) {
+                return;
+            }
+            document.getElementById("text").value = params.get("text");
+            generate();
+        }
+        fillFromPermaLink();
     </script>
 </body>
 
