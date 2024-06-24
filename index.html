@@ -167,7 +167,8 @@
                     fill="#fff" />
             </svg>
         </a>
-        <a href="javascript:void(0)" class="button" id="copy" style="display: none" title="Copy" onclick="copyText()">
+        <a href="javascript:void(0)" class="button" id="copy" style="display: none" title="Copy Permalink"
+            onclick="copyText()">
             <svg xmlns="http://www.w3.org/2000/svg" width="5vh" height="4vh" viewBox="0 0 24 24" fill="none">
                 <path
                     d="M17.5 14H19C20.1046 14 21 13.1046 21 12V5C21 3.89543 20.1046 3 19 3H12C10.8954 3 10 3.89543 10 5V6.5M5 10H12C13.1046 10 14 10.8954 14 12V19C14 20.1046 13.1046 21 12 21H5C3.89543 21 3 20.1046 3 19V12C3 10.8954 3.89543 10 5 10Z"
@@ -201,6 +202,7 @@
             const modalText = document.getElementById("modalText");
             modalText.innerHTML = text;
             modalText.href = text;
+            window.history.pushState(null, "QR Code Generator", getPermaLink());
             setTimeout(() => {
                 let dataString = document.getElementById("qrcode").querySelector("img").src;
                 download.href = dataString;
@@ -217,12 +219,13 @@
             document.getElementById("modal").style.display = "none";
         }
 
+        function getPermaLink() {
+            return `${window.location.origin + window.location.pathname}?text=${document.getElementById("text").value}`;
+        }
+
         function copyText() {
-            const text = document.getElementById("text");
-            text.select();
-            text.setSelectionRange(0, 99999);
-            navigator.clipboard.writeText(text.value);
-            alert(text.value + " copied to clipboard");
+            const selection = getPermaLink();
+            navigator.clipboard.writeText(selection);
         }
 
         function fillFromPermaLink() {
