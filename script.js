@@ -1,4 +1,5 @@
 const qrcode = new QRCode("qrcode");
+var text;
 
 document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
@@ -6,10 +7,29 @@ document.addEventListener("keydown", (e) => {
     }
 })
 
-function generate() {
+document.getElementById("form-type").addEventListener("change", (e) => {
+    let other;
+    switch (e.target.value) {
+        case "text":
+            other = "wifi";
+            break;
+        case "wifi":
+            other = "text";
+    }
+    document.getElementById(`${other}-form`).style.display = "none";
+    document.getElementById(`${e.target.value}-form`).style.display = "flex";
+});
+
+function createWifiString() {
+    const ssid = document.getElementById("wifi-ssid").value;
+    const password = document.getElementById("wifi-pass").value;
+    return `WIFI:T:WPA;S:${ssid};P:${password};;`;
+}
+
+function generate(value) {
     document.getElementById("fullscreen").style.display = "block";
     document.getElementById("copy").style.display = "block";
-    const text = document.getElementById("text").value;
+    text = value || document.getElementById("text").value;
     qrcode.makeCode(text);
     const download = document.getElementById("download");
     download.style.display = "block";
@@ -34,7 +54,7 @@ function closeModal() {
 }
 
 function getPermaLink() {
-    return `${window.location.origin + window.location.pathname}?text=${document.getElementById("text").value}`;
+    return `${window.location.origin + window.location.pathname}?text=${text}`;
 }
 
 function copyText() {

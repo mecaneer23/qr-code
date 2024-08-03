@@ -28,7 +28,21 @@
         <a id="modalText"></a>
     </div>
 
-    <form id="text-form" action="javascript:generate()">
+    <form id="form-type">
+        <input id="text-button" type="radio" name="type" value="text" class="radio-button" checked>
+        <label class="radio-item" for="text-button">URL or text</label>
+        <br>
+        <input id="wifi-button" type="radio" name="type" value="wifi" class="radio-button">
+        <label class="radio-item" for="wifi-button">WiFi login</label>
+    </form>
+
+    <form id="wifi-form" action="javascript:generate(createWifiString());">
+        <input type="text" id="wifi-ssid" placeholder="Enter WiFi name/SSID" required>
+        <input type="text" id="wifi-pass" placeholder="Enter WiFi password" required>
+        <input class="button" type="submit" value="Submit">
+    </form>
+
+    <form id="text-form" action="javascript:generate();">
         <input type="text" id="text" placeholder="Enter URL or text">
         <input class="button" type="submit" value="Submit">
     </form>
