@@ -1,8 +1,4 @@
 const qrcode = new QRCode("qrcode");
-if (!qrcode) {
-    alert("qrcode.min.js script wasn't loaded. Please ensure this webpage is using HTTPS rather than HTTP.");
-    location.reload();
-}
 var text;
 
 document.addEventListener("keydown", (e) => {
