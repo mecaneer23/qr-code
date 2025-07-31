@@ -1,6 +1,6 @@
 # QR Code Generators
 
-![Screenshot](screenshot.png)
+[![Screenshot](screenshot.png)](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
 
 Using existing libraries, provide a user-facing interface to generate QR Codes.
 
